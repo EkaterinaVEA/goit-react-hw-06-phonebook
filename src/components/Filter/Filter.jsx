@@ -1,20 +1,15 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import shortid from 'shortid';
-import { useState } from 'react';
 import { RiFilter2Line } from 'react-icons/ri';
+import { useSelector, useDispatch } from "react-redux";
+import contactsActions from "../../redux/contacts/contacrtsActions";
+import { getFilter } from "../../redux/contacts/contactsSelectors";
 import { FilterContainer, Label, Input } from './Filter.styles';
 
-export const Filter = ({onChange}) => {
-  const [value, setValue] = useState("");
-
+const Filter = (/*{ value, onChange }*/) => {
   const filterInputId = shortid();
-
-  const handleChangeFilter = e => {
-    const { value } = e.target;
-
-    setValue(value);
-    onChange(value);
-  };
+  const value = useSelector(getFilter);
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -22,7 +17,7 @@ export const Filter = ({onChange}) => {
         <Input
           id={filterInputId}
           name="filter"
-          onChange={handleChangeFilter}
+          onChange={(e) => dispatch(contactsActions.changeFilter(e.target.value))}
           type="text"
           value={value}
           placeholder="Name"
@@ -36,7 +31,8 @@ export const Filter = ({onChange}) => {
   );
 }
 
-Input.propTypes = {
-  value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-};
+// Input.propTypes = {
+//   value: PropTypes.string.isRequired,
+//   onChange: PropTypes.func.isRequired,
+// };
+export default Filter;

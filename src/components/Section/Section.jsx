@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { Wrapper, Title } from './Section.styles';
 import { RiBook2Line } from 'react-icons/ri';
 
-export const Section = ({ title, children }) => {
+const Section = ({ title, children }) => {
   return (
     <Wrapper>
       {title && (
@@ -20,3 +20,4 @@ Section.propTypes = {
   title: PropTypes.string,
   children: PropTypes.node.isRequired,
 };
+export default Section;

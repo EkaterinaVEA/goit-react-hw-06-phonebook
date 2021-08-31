@@ -1,8 +1,13 @@
 import PhoneBookListItem from '../PhoneBookListItem/PhoneBookListItem';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
+import { getFilteredContacts } from "../../redux/contacts/contactsSelectors";
+import {  useSelector, useDispatch } from "react-redux";
+import contactsActions from "../../redux/contacts/contacrtsActions";
 import { List } from './PhoneBookList.styles';
 
-const PhoneBookList = ({ contacts, onDeleteContact }) => {
+const PhoneBookList = (/*{ contacts, onDeleteContact }*/) => {
+  const contacts = useSelector(getFilteredContacts);
+  const dispatch = useDispatch();
   return (
     <List>
       {contacts.map(({ name, number, id }) => {
@@ -12,7 +17,7 @@ const PhoneBookList = ({ contacts, onDeleteContact }) => {
             name={name}
             number={number}
             id={id}
-            onDeleteContact={onDeleteContact}
+            onDeleteContact={() => dispatch(contactsActions.deleteContact(id))}
           />
         );
       })}
@@ -20,9 +25,9 @@ const PhoneBookList = ({ contacts, onDeleteContact }) => {
   );
 };
 
-PhoneBookList.propTypes = {
-  onDeleteContact: PropTypes.func.isRequired,
-  contacts:PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
-};
+// PhoneBookList.propTypes = {
+//   onDeleteContact: PropTypes.func.isRequired,
+//   contacts:PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
+// };
 
 export default PhoneBookList;

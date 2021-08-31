@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { Item, Button } from './PhoneBookListItem.styles';
 import { RiUserHeartFill } from 'react-icons/ri';
 
-const PhoneBookListItem = ({ name, number, id, onDeleteContact }) => {
+const PhoneBookListItem = ({ name, number, onDeleteContact }) => {
   return (
     <Item>
       <span>
@@ -10,7 +10,7 @@ const PhoneBookListItem = ({ name, number, id, onDeleteContact }) => {
         {name}:
       </span>
       <span>{number}</span>
-      <Button onClick={() => {onDeleteContact(id)}}>
+      <Button onClick={onDeleteContact}>
         delete
       </Button>
     </Item>

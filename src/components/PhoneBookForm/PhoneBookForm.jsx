@@ -1,12 +1,15 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { useState } from 'react';
+import { useDispatch } from "react-redux";
+import contactsActions from "../../redux/contacts/contacrtsActions";
 import shortid from 'shortid';
 import { Form, Label, Input, Button, ContainerForm } from './PhoneBookForm.styles';
 import { RiUserLine, RiPhoneLine, RiUserAddLine } from 'react-icons/ri';
 
-export const PhoneBookForm = ({onSubmit}) => {
+const PhoneBookForm = (/*{onSubmit}*/) => {
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
+  const dispatch = useDispatch();
 
   const nameInputId = shortid();
   const telInputId = shortid();
@@ -31,7 +34,8 @@ export const PhoneBookForm = ({onSubmit}) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    onSubmit({name, number});
+    // onSubmit({name, number});
+    dispatch(contactsActions.addContact(name, number));
     setName("");
     setNumber("");
   };
@@ -83,13 +87,13 @@ export const PhoneBookForm = ({onSubmit}) => {
     </Form>
   );
 }
+export default PhoneBookForm;
+// PhoneBookForm.propTypes = {
+//   onSubmit: PropTypes.func,
+// };
 
-PhoneBookForm.propTypes = {
-  onSubmit: PropTypes.func,
-};
-
-Input.propTypes = {
-  onChange: PropTypes.func.isRequired,
-  value: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
-};
+// Input.propTypes = {
+//   onChange: PropTypes.func.isRequired,
+//   value: PropTypes.string.isRequired,
+//   id: PropTypes.string.isRequired,
+// };
